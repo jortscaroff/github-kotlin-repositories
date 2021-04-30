@@ -2,9 +2,12 @@ package com.kairosapp.githubkotlinrepositories.data
 
 import com.google.gson.annotations.SerializedName
 
-data class RepositoryResult(val items: List<Item>)
+data class RepositoryResult(
+    @SerializedName("items")
+    val items: List<RepositoryApi>
+    )
 
-data class Item(
+data class RepositoryApi(
     @SerializedName("id")
     val id: Long?,
 
@@ -27,13 +30,16 @@ data class Item(
     val description: String?,
 
     @SerializedName("stargazers_count")
-    val stargazersCount: Long?,
+    val stargazersCount: Int?,
 
     @SerializedName("watchers_count")
-    val watchersCount: Long?,
+    val watchersCount: Int?,
 
     @SerializedName("forks_count")
-    val forksCount: Long?)
+    val forksCount: Int?,
+
+    @SerializedName("open_issues_count")
+    val openIssuesCount: Int?)
 
 data class Owner(
     @SerializedName("login")

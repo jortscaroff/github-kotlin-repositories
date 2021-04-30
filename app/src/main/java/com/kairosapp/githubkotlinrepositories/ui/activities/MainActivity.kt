@@ -1,4 +1,4 @@
-package com.kairosapp.githubkotlinrepositories
+package com.kairosapp.githubkotlinrepositories.ui.activities
 
 import android.app.AlertDialog
 import android.os.Bundle
@@ -10,7 +10,7 @@ import com.kairosapp.githubkotlinrepositories.databinding.ActivityMainBinding
 import com.kairosapp.githubkotlinrepositories.ui.adapter.RepositoryRecyclerAdapter
 import com.kairosapp.githubkotlinrepositories.ui.viewmodel.RepositoryListViewModel
 
-const val TAG = "MainActivity"
+private const val TAG = "MainActivity"
 
 class MainActivity : AppCompatActivity() {
 
@@ -39,7 +39,7 @@ class MainActivity : AppCompatActivity() {
                 is RepositoryListViewModel.State.Loaded -> {
                     progressListRepositories.visibility = View.GONE
                     listRepositories.visibility = View.VISIBLE
-                    listRepositories.adapter = RepositoryRecyclerAdapter(state.repositoryResult)
+                    listRepositories.adapter = RepositoryRecyclerAdapter(this, state.repositoryResult)
                 }
                 is RepositoryListViewModel.State.Error -> {
                     progressListRepositories.visibility = View.GONE
