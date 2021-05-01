@@ -7,8 +7,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
-import com.kairosapp.githubkotlinrepositories.REPOSITORY_NAME
-import com.kairosapp.githubkotlinrepositories.REPOSITORY_OWNER
+import com.kairosapp.githubkotlinrepositories.*
 import com.kairosapp.githubkotlinrepositories.databinding.ActivityRepositoryDetailsBinding
 import com.kairosapp.githubkotlinrepositories.ui.viewmodel.RepositoryDetailsViewModel
 
@@ -48,21 +47,25 @@ class RepositoryDetailsActivity : AppCompatActivity() {
             when (state) {
                 is RepositoryDetailsViewModel.State.Loading -> {
                     Log.d(TAG, "onCreate: ${repositoryDetailsViewModel.state.value}")
+                    binding.detailsScrollView.visibility = View.GONE
                     progressRepositoryDetails.visibility = View.VISIBLE
 
                 }
                 is RepositoryDetailsViewModel.State.Loaded -> {
                     Log.d(TAG, "onCreate: ${repositoryDetailsViewModel.state.value}")
                     progressRepositoryDetails.visibility = View.GONE
-
+                    setTextViews()
+                    binding.detailsScrollView.visibility = View.VISIBLE
                 }
                 is RepositoryDetailsViewModel.State.Error -> {
                     Log.d(TAG, "onCreate: ${repositoryDetailsViewModel.state.value}")
+                    binding.detailsScrollView.visibility = View.GONE
                     progressRepositoryDetails.visibility = View.GONE
 
                 }
                 is RepositoryDetailsViewModel.State.NotStarted -> {
                     Log.d(TAG, "onCreate: ${repositoryDetailsViewModel.state.value}")
+                    binding.detailsScrollView.visibility = View.GONE
                     progressRepositoryDetails.visibility = View.GONE
 
                 }
@@ -70,5 +73,18 @@ class RepositoryDetailsActivity : AppCompatActivity() {
         })
 
         Log.d(TAG, "onCreate: ${intent.extras?.getString(REPOSITORY_OWNER)}")
+    }
+
+    private fun setTextViews() {
+        binding.textRepositoryName.text =
+            intent.extras?.getString(REPOSITORY_NAME)
+        binding.textRepositoryDescription.text =
+            intent.extras?.getString(REPOSITORY_DESCRIPTION)
+        binding.textWatchersCount.text =
+            intent.extras?.getInt(REPOSITORY_WATCHERS_COUNT).toString()
+        binding.textStargazersCount.text =
+            intent.extras?.getInt(REPOSITORY_STARS_COUNT).toString()
+        binding.textForksCount.text =
+            intent.extras?.getInt(REPOSITORY_FORKS_COUNT).toString()
     }
 }

@@ -7,9 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.kairosapp.githubkotlinrepositories.R
-import com.kairosapp.githubkotlinrepositories.REPOSITORY_NAME
-import com.kairosapp.githubkotlinrepositories.REPOSITORY_OWNER
+import com.kairosapp.githubkotlinrepositories.*
 import com.kairosapp.githubkotlinrepositories.data.RepositoryResult
 import com.kairosapp.githubkotlinrepositories.ui.activities.RepositoryDetailsActivity
 
@@ -31,9 +29,9 @@ class RepositoryRecyclerAdapter(private val context: Context, private val reposi
     override fun getItemCount() = repositories.items.size
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        val textUsername: TextView = itemView.findViewById(R.id.username)
-        val textName: TextView = itemView.findViewById(R.id.repositoryName)
-        val textDescription: TextView = itemView.findViewById(R.id.repositoryDescription)
+        val textUsername: TextView = itemView.findViewById(R.id.textOwner)
+        val textName: TextView = itemView.findViewById(R.id.textName)
+        val textDescription: TextView = itemView.findViewById(R.id.textDescription)
         var repositoryPosition = 0
 
         init {
@@ -41,6 +39,10 @@ class RepositoryRecyclerAdapter(private val context: Context, private val reposi
                 val intent = Intent(context, RepositoryDetailsActivity::class.java)
                 intent.putExtra(REPOSITORY_NAME, repositories.items[repositoryPosition].name)
                 intent.putExtra(REPOSITORY_OWNER, repositories.items[repositoryPosition].owner.login)
+                intent.putExtra(REPOSITORY_DESCRIPTION, repositories.items[repositoryPosition].description)
+                intent.putExtra(REPOSITORY_WATCHERS_COUNT, repositories.items[repositoryPosition].watchersCount)
+                intent.putExtra(REPOSITORY_STARS_COUNT, repositories.items[repositoryPosition].stargazersCount)
+                intent.putExtra(REPOSITORY_FORKS_COUNT, repositories.items[repositoryPosition].forksCount)
                 context.startActivity(intent)
             }
         }
