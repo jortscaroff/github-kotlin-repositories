@@ -4,7 +4,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.kairosapp.githubkotlinrepositories.api.RepositoryRetriever
-import com.kairosapp.githubkotlinrepositories.data.IssueApi
+import com.kairosapp.githubkotlinrepositories.domain.Issue
 import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.launch
 
@@ -27,7 +27,7 @@ class RepositoryDetailsViewModel (private val owner: String, private val reposit
     sealed class State() {
         object NotStarted: State()
         object Loading: State()
-        data class Loaded(val issueResult: List<IssueApi>): State()
+        data class Loaded(val issues: List<Issue>): State()
         data class Error(val error: Throwable): State()
     }
 }

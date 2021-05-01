@@ -1,11 +1,7 @@
 package com.kairosapp.githubkotlinrepositories.data
 
 import com.google.gson.annotations.SerializedName
-
-data class RepositoryResult(
-    @SerializedName("items")
-    val items: List<RepositoryApi>
-    )
+import com.kairosapp.githubkotlinrepositories.domain.Repository
 
 data class RepositoryApi(
     @SerializedName("id")
@@ -18,7 +14,7 @@ data class RepositoryApi(
     val fullName: String?,
 
     @SerializedName("owner")
-    val owner: Owner,
+    val owner: OwnerApi,
 
     @SerializedName("private")
     val private: Boolean,
@@ -39,14 +35,21 @@ data class RepositoryApi(
     val forksCount: Int?,
 
     @SerializedName("open_issues_count")
-    val openIssuesCount: Int?)
-
-data class Owner(
-    @SerializedName("login")
-    val login: String?,
-
-    @SerializedName("id")
-    val id: Long?,
-
-    @SerializedName("avatar_url")
-    val avatarUrl: String?)
+    val openIssuesCount: Int?
+) {
+    fun toModel(): Repository {
+        return Repository(
+            id,
+            name,
+            fullName,
+            owner.toModel(),
+            private,
+            htmlUrl,
+            description,
+            stargazersCount,
+            watchersCount,
+            forksCount,
+            openIssuesCount
+        )
+    }
+}

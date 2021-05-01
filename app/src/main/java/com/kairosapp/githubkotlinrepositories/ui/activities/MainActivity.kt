@@ -39,7 +39,7 @@ class MainActivity : AppCompatActivity() {
                 is RepositoryListViewModel.State.Loaded -> {
                     progressListRepositories.visibility = View.GONE
                     listRepositories.visibility = View.VISIBLE
-                    listRepositories.adapter = RepositoryRecyclerAdapter(this, state.repositoryResult)
+                    listRepositories.adapter = RepositoryRecyclerAdapter(this, state.repositories)
                 }
                 is RepositoryListViewModel.State.Error -> {
                     progressListRepositories.visibility = View.GONE

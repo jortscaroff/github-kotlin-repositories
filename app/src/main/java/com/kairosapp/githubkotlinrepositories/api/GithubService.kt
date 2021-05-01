@@ -1,7 +1,7 @@
 package com.kairosapp.githubkotlinrepositories.api
 
 import com.kairosapp.githubkotlinrepositories.data.IssueApi
-import com.kairosapp.githubkotlinrepositories.data.RepositoryResult
+import com.kairosapp.githubkotlinrepositories.data.RepositoryApiResponse
 import retrofit2.http.GET
 import retrofit2.http.Path
 import retrofit2.http.Query
@@ -14,7 +14,7 @@ interface GithubService {
         @Query("order") order: String? = "desc",
         @Query("per_page") perPage: Int,
         @Query("page") page: Int? = 1
-    ): RepositoryResult
+    ): RepositoryApiResponse
 
     @GET("repos/{owner}/{repo}/issues")
     suspend fun fetchRepoIssues(
