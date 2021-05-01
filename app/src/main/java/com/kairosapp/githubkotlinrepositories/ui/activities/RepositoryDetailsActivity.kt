@@ -7,9 +7,11 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.jakewharton.threetenabp.AndroidThreeTen
 import com.kairosapp.githubkotlinrepositories.*
 import com.kairosapp.githubkotlinrepositories.databinding.ActivityRepositoryDetailsBinding
+import com.kairosapp.githubkotlinrepositories.ui.adapter.RepositoryIssuesByWeekRecyclerAdapter
 import com.kairosapp.githubkotlinrepositories.ui.viewmodel.RepositoryDetailsViewModel
 
 private const val TAG = "RepositoryDetailsAct"
@@ -48,6 +50,9 @@ class RepositoryDetailsActivity : AppCompatActivity() {
 
         val progressRepositoryDetails = binding.progressRepositoryDetails
 
+        val listIssuesByWeek = binding.listIssues
+        listIssuesByWeek.layoutManager = LinearLayoutManager(this)
+
         repositoryDetailsViewModel.state.observe(this, { state ->
             when (state) {
                 is RepositoryDetailsViewModel.State.Loading -> {
@@ -61,6 +66,7 @@ class RepositoryDetailsActivity : AppCompatActivity() {
                     Log.d(TAG, "onCreate: ${state.issues.size}")
                     progressRepositoryDetails.visibility = View.GONE
                     setTextViews()
+                    listIssuesByWeek.adapter = RepositoryIssuesByWeekRecyclerAdapter(this, state.issues)
                     binding.detailsScrollView.visibility = View.VISIBLE
                 }
                 is RepositoryDetailsViewModel.State.Error -> {
