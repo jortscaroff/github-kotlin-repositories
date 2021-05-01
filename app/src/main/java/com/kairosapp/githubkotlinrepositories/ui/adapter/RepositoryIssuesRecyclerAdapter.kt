@@ -1,13 +1,16 @@
 package com.kairosapp.githubkotlinrepositories.ui.adapter
 
+import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.kairosapp.githubkotlinrepositories.R
 
-class RepositoryIssuesAdapter : RecyclerView.Adapter<RepositoryIssuesAdapter.ViewHolder>() {
+class RepositoryIssuesRecyclerAdapter : RecyclerView.Adapter<RepositoryIssuesRecyclerAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        TODO("Not yet implemented")
+        val itemView = LayoutInflater.from(parent.context).inflate(R.layout.item_issue_list, parent, false)
+        return ViewHolder(itemView)
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {

@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
+import com.jakewharton.threetenabp.AndroidThreeTen
 import com.kairosapp.githubkotlinrepositories.*
 import com.kairosapp.githubkotlinrepositories.databinding.ActivityRepositoryDetailsBinding
 import com.kairosapp.githubkotlinrepositories.ui.viewmodel.RepositoryDetailsViewModel
@@ -14,6 +15,7 @@ import com.kairosapp.githubkotlinrepositories.ui.viewmodel.RepositoryDetailsView
 private const val TAG = "RepositoryDetailsAct"
 
 class RepositoryDetailsActivity : AppCompatActivity() {
+
 
     private lateinit var binding: ActivityRepositoryDetailsBinding
 
@@ -38,6 +40,9 @@ class RepositoryDetailsActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        AndroidThreeTen.init(this)
+
         binding = ActivityRepositoryDetailsBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
@@ -53,6 +58,7 @@ class RepositoryDetailsActivity : AppCompatActivity() {
                 }
                 is RepositoryDetailsViewModel.State.Loaded -> {
                     Log.d(TAG, "onCreate: ${repositoryDetailsViewModel.state.value}")
+                    Log.d(TAG, "onCreate: ${state.issues.size}")
                     progressRepositoryDetails.visibility = View.GONE
                     setTextViews()
                     binding.detailsScrollView.visibility = View.VISIBLE

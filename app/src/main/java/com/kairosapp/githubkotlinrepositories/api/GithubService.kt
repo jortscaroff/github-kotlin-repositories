@@ -20,6 +20,7 @@ interface GithubService {
     suspend fun fetchRepoIssues(
         @Path("owner") owner: String,
         @Path("repo") repo: String,
+        @Query("since") since: String,
         @Query("per_page") perPage: Int,
         @Query("page") page: Int,
     ): List<IssueApi>

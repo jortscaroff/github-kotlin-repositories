@@ -1,6 +1,6 @@
 package com.kairosapp.githubkotlinrepositories.domain
 
-import java.time.LocalDateTime
+import org.threeten.bp.LocalDateTime
 
 data class Issue(
     val id: Int,

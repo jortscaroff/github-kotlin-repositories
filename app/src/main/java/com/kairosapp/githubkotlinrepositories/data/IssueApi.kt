@@ -2,8 +2,8 @@ package com.kairosapp.githubkotlinrepositories.data
 
 import com.google.gson.annotations.SerializedName
 import com.kairosapp.githubkotlinrepositories.domain.Issue
-import java.time.LocalDateTime
-import java.time.format.DateTimeFormatter
+import org.threeten.bp.LocalDateTime
+import org.threeten.bp.format.DateTimeFormatter
 
 data class IssueApi(
     @SerializedName("id")
