@@ -30,7 +30,7 @@ class RepositoryDetailsActivity : AppCompatActivity() {
     private val repositoryDetailsViewModel: RepositoryDetailsViewModel by lazy {
         val factory = viewModelFactory {
             // I couldn't find how to inject the RepositoryRetriever necessary for RepositoryDetailsViewModel
-            // due to the need of repository owner and name parameters for the viewmode
+            // due to the need of repository owner and name parameters for the viewmodel
             RepositoryDetailsViewModel(
                 RepositoryRetrieverImpl(
                         Retrofit.Builder()
