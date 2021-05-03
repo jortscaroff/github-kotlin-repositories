@@ -8,8 +8,12 @@ import com.kairosapp.githubkotlinrepositories.domain.IssuesByWeek
 import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.launch
 import org.threeten.bp.LocalDateTime
+import javax.inject.Inject
 
-class RepositoryDetailsViewModel (private val owner: String, private val repositoryName: String) : ViewModel() {
+class RepositoryDetailsViewModel @Inject constructor (
+    private val repositoryRetriever : RepositoryRetriever,
+    private val owner: String,
+    private val repositoryName: String) : ViewModel() {
 
     var state = MutableLiveData<State>()
 
@@ -22,8 +26,9 @@ class RepositoryDetailsViewModel (private val owner: String, private val reposit
             state.value = State.Loading
             //val resultList = RepositoryRetriever().getIssues(owner, repositoryName, LocalDateTime.now().minusYears(1))
             //state.value = State.Loaded(resultList)
-            val resultList2 = RepositoryRetriever().getIssuesByWeek(owner, repositoryName, LocalDateTime.now().minusYears(1))
-            state.value = State.Loaded(resultList2)
+            //val resultList2 = RepositoryRetrieverImpl().getIssuesByWeek(owner, repositoryName, LocalDateTime.now().minusYears(1))
+            val resultList3 = repositoryRetriever.getIssuesByWeek(owner, repositoryName, LocalDateTime.now().minusYears(1))
+            state.value = State.Loaded(resultList3)
         }
     }
 

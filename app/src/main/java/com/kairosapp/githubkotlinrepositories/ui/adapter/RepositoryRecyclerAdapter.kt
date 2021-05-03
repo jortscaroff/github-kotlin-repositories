@@ -36,7 +36,7 @@ class RepositoryRecyclerAdapter(private val context: Context, private val reposi
 
         init {
             itemView.setOnClickListener {
-                val intent = Intent(context, RepositoryDetailsActivity::class.java)
+                val intent = Intent(context, RepositoryDetailsActivity::class.java, )
                 intent.putExtra(REPOSITORY_NAME, repositories[repositoryPosition].name)
                 intent.putExtra(REPOSITORY_OWNER, repositories[repositoryPosition].owner.login)
                 intent.putExtra(REPOSITORY_DESCRIPTION, repositories[repositoryPosition].description)

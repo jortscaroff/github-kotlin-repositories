@@ -5,10 +5,13 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.kairosapp.githubkotlinrepositories.api.RepositoryRetriever
 import com.kairosapp.githubkotlinrepositories.domain.Repository
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class RepositoryListViewModel : ViewModel() {
+@HiltViewModel
+class RepositoryListViewModel @Inject constructor(private val repositoryRetriever: RepositoryRetriever): ViewModel() {
 
     var state = MutableLiveData<State>()
 
@@ -19,7 +22,9 @@ class RepositoryListViewModel : ViewModel() {
 
         viewModelScope.launch(handler) {
             state.value = State.Loading
-            val resultList = RepositoryRetriever().getRepositories()
+//            val resultList = RepositoryRetrieverImpl().getRepositories()
+            val resultList = repositoryRetriever.getRepositories()
+
             state.value = State.Loaded(resultList)
         }
     }

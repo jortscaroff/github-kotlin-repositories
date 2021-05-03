@@ -9,9 +9,11 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.kairosapp.githubkotlinrepositories.databinding.ActivityMainBinding
 import com.kairosapp.githubkotlinrepositories.ui.adapter.RepositoryRecyclerAdapter
 import com.kairosapp.githubkotlinrepositories.ui.viewmodel.RepositoryListViewModel
+import dagger.hilt.android.AndroidEntryPoint
 
 private const val TAG = "MainActivity"
 
+@AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding

@@ -10,12 +10,18 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.jakewharton.threetenabp.AndroidThreeTen
 import com.kairosapp.githubkotlinrepositories.*
+import com.kairosapp.githubkotlinrepositories.api.GithubService
+import com.kairosapp.githubkotlinrepositories.api.RepositoryRetrieverImpl
 import com.kairosapp.githubkotlinrepositories.databinding.ActivityRepositoryDetailsBinding
 import com.kairosapp.githubkotlinrepositories.ui.adapter.RepositoryIssuesByWeekRecyclerAdapter
 import com.kairosapp.githubkotlinrepositories.ui.viewmodel.RepositoryDetailsViewModel
+import dagger.hilt.android.AndroidEntryPoint
+import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
 
 private const val TAG = "RepositoryDetailsAct"
 
+@AndroidEntryPoint
 class RepositoryDetailsActivity : AppCompatActivity() {
 
 
@@ -23,7 +29,14 @@ class RepositoryDetailsActivity : AppCompatActivity() {
 
     private val repositoryDetailsViewModel: RepositoryDetailsViewModel by lazy {
         val factory = viewModelFactory {
+            // I couldn't find how to inject the RepositoryRetriever necessary for RepositoryDetailsViewModel
+            // due to the need of repository owner and name parameters for the viewmodel
             RepositoryDetailsViewModel(
+                RepositoryRetrieverImpl(
+                        Retrofit.Builder()
+                            .baseUrl("https://api.github.com")
+                            .addConverterFactory(GsonConverterFactory.create())
+                            .build().create(GithubService::class.java)),
                 intent.extras?.getString(REPOSITORY_OWNER)!!,
                 intent.extras?.getString(REPOSITORY_NAME)!!
             )
