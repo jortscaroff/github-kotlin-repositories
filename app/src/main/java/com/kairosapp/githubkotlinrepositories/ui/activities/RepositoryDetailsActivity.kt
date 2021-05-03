@@ -78,7 +78,7 @@ class RepositoryDetailsActivity : AppCompatActivity() {
                     Log.d(TAG, "onCreate: ${repositoryDetailsViewModel.state.value}")
                     Log.d(TAG, "onCreate: ${state.issues.size}")
                     progressRepositoryDetails.visibility = View.GONE
-                    setTextViews()
+                    setTextViews(state)
                     listIssuesByWeek.adapter = RepositoryIssuesByWeekRecyclerAdapter(this, state.issues)
                     binding.detailsScrollView.visibility = View.VISIBLE
                 }
@@ -100,13 +100,12 @@ class RepositoryDetailsActivity : AppCompatActivity() {
         Log.d(TAG, "onCreate: ${intent.extras?.getString(REPOSITORY_OWNER)}")
     }
 
-    private fun setTextViews() {
+    private fun setTextViews(state: RepositoryDetailsViewModel.State.Loaded) {
         binding.textRepositoryName.text =
             intent.extras?.getString(REPOSITORY_NAME)
         binding.textRepositoryDescription.text =
             intent.extras?.getString(REPOSITORY_DESCRIPTION)
-        binding.textWatchersCount.text =
-            intent.extras?.getInt(REPOSITORY_WATCHERS_COUNT).toString()
+        binding.textWatchersCount.text = state.subscribersCount.toString()
         binding.textStargazersCount.text =
             intent.extras?.getInt(REPOSITORY_STARS_COUNT).toString()
         binding.textForksCount.text =
