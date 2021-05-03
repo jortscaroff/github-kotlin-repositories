@@ -6,6 +6,7 @@ import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.kairosapp.githubkotlinrepositories.GithubUtils
 import com.kairosapp.githubkotlinrepositories.databinding.ActivityMainBinding
 import com.kairosapp.githubkotlinrepositories.ui.adapter.RepositoryRecyclerAdapter
 import com.kairosapp.githubkotlinrepositories.ui.viewmodel.RepositoryListViewModel
@@ -22,10 +23,17 @@ class MainActivity : AppCompatActivity() {
         ViewModelProvider(this).get(RepositoryListViewModel::class.java)
     }
 
+    private val githubUtils: GithubUtils by lazy {
+        GithubUtils()
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        val code = githubUtils.getCodeFromUri(intent.data)
+        code ?: return
 
         val progressListRepositories = binding.progressListRepositories
 

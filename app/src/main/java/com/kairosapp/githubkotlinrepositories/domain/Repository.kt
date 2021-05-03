@@ -11,5 +11,6 @@ data class Repository(
     val stargazersCount: Int?,
     val watchersCount: Int?,
     val forksCount: Int?,
-    val openIssuesCount: Int?
+    val openIssuesCount: Int?,
+    val subscribersCount: Int?
 )

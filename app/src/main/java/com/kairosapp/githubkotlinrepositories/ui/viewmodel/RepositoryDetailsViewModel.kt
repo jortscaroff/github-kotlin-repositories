@@ -24,15 +24,16 @@ class RepositoryDetailsViewModel @Inject constructor (
 
         viewModelScope.launch(handler) {
             state.value = State.Loading
+            val subscribersCount = repositoryRetriever.getRepoSubscribersCount(owner, repositoryName)
             val resultList = repositoryRetriever.getIssuesByWeek(owner, repositoryName, LocalDateTime.now().minusYears(1))
-            state.value = State.Loaded(resultList)
+            state.value = State.Loaded(subscribersCount, resultList)
         }
     }
 
     sealed class State() {
         object NotStarted: State()
         object Loading: State()
-        data class Loaded(val issues: List<IssuesByWeek>): State()
+        data class Loaded(val subscribersCount: Int, val issues: List<IssuesByWeek>): State()
         data class Error(val error: Throwable): State()
     }
 }

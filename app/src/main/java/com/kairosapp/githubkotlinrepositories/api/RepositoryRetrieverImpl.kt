@@ -37,6 +37,10 @@ class RepositoryRetrieverImpl @Inject constructor (private val githubService: Gi
         return repositoriesList
     }
 
+    override suspend fun getRepoSubscribersCount(owner: String, repo: String): Int {
+        return githubService.fetchRepoDetails(owner, repo).subscribersCount
+    }
+
     override suspend fun getIssuesByWeek(
         owner: String,
         repo: String,

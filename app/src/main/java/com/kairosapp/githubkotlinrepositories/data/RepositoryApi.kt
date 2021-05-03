@@ -49,7 +49,8 @@ data class RepositoryApi(
             stargazersCount,
             watchersCount,
             forksCount,
-            openIssuesCount
+            openIssuesCount,
+            null,
         )
     }
 }

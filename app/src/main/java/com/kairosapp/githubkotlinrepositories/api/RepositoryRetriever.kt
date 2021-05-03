@@ -7,6 +7,11 @@ import org.threeten.bp.LocalDateTime
 interface RepositoryRetriever {
     suspend fun getRepositories(): List<Repository>
 
+    suspend fun getRepoSubscribersCount(
+        owner: String,
+        repo: String
+    ): Int
+
     suspend fun getIssuesByWeek(
         owner: String,
         repo: String,
