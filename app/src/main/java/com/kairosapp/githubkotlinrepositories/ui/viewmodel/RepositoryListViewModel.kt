@@ -22,7 +22,6 @@ class RepositoryListViewModel @Inject constructor(private val repositoryRetrieve
 
         viewModelScope.launch(handler) {
             state.value = State.Loading
-//            val resultList = RepositoryRetrieverImpl().getRepositories()
             val resultList = repositoryRetriever.getRepositories()
 
             state.value = State.Loaded(resultList)
