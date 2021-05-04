@@ -8,19 +8,6 @@ import org.threeten.bp.format.DateTimeFormatter
 import javax.inject.Inject
 
 class RepositoryRetrieverImpl @Inject constructor (private val githubService: GithubService) : RepositoryRetriever {
-//    private val service: GithubService
-//
-//    companion object {
-//        const val BASE_URL = "https://api.github.com"
-//    }
-//
-//    init {
-//        val retrofit = Retrofit.Builder()
-//            .baseUrl(BASE_URL)
-//            .addConverterFactory(GsonConverterFactory.create())
-//            .build()
-//        service = retrofit.create(GithubService::class.java)
-//    }
 
     override suspend fun getRepositories(): List<Repository> {
         val apiRepositories = githubService.fetchRepositories(
@@ -43,14 +30,13 @@ class RepositoryRetrieverImpl @Inject constructor (private val githubService: Gi
 
     override suspend fun getIssuesByWeek(
         owner: String,
-        repo: String,
-        since: LocalDateTime
+        repo: String
     ): List<IssuesByWeek> {
 
         val apiIssues = githubService.fetchRepoIssues(
             owner = owner,
             repo = repo,
-            since = DateTimeFormatter.ISO_DATE_TIME.format(since),
+            since = DateTimeFormatter.ISO_DATE_TIME.format(LocalDateTime.now().minusYears(1)),
             perPage = 100,
             page = 1
         )

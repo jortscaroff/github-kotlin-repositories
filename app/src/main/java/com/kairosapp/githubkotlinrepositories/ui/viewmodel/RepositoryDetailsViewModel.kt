@@ -7,7 +7,6 @@ import com.kairosapp.githubkotlinrepositories.api.RepositoryRetriever
 import com.kairosapp.githubkotlinrepositories.domain.IssuesByWeek
 import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.launch
-import org.threeten.bp.LocalDateTime
 import javax.inject.Inject
 
 class RepositoryDetailsViewModel @Inject constructor (
@@ -25,7 +24,7 @@ class RepositoryDetailsViewModel @Inject constructor (
         viewModelScope.launch(handler) {
             state.value = State.Loading
             val subscribersCount = repositoryRetriever.getRepoSubscribersCount(owner, repositoryName)
-            val resultList = repositoryRetriever.getIssuesByWeek(owner, repositoryName, LocalDateTime.now().minusYears(1))
+            val resultList = repositoryRetriever.getIssuesByWeek(owner, repositoryName)
             state.value = State.Loaded(subscribersCount, resultList)
         }
     }
