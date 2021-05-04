@@ -18,10 +18,10 @@ class RepositoryRetrieverImplTest : BaseTest() {
     fun testThatGetRepositoriesReturnsTheCorrectList() = runBlockingTest {
         val (repositoryRetriever) = createTestData()
 
-        val repositoryResult = repositoryRetriever.getRepositories()
+        val repositoryList = repositoryRetriever.getRepositories()
 
         val expectedResult = RepositoryApiResponse(listOf(repositoryApi1, repositoryApi2)).toModel()
-        assertEquals(expectedResult, repositoryResult)
+        assertEquals(expectedResult, repositoryList)
     }
 
     @ExperimentalCoroutinesApi
