@@ -66,9 +66,11 @@
                 android:text="@string/details_forks"
                 android:textColor="@color/black"
                 android:textSize="16sp"
+                android:drawablePadding="6dp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textStargazersLabel"
-                tools:text="Forks" />
+                tools:text="Forks"
+                app:drawableStartCompat="@drawable/ic_fork_24" />
 
             <TextView
                 android:id="@+id/textForksCount"
@@ -103,9 +105,11 @@
                 android:text="@string/details_stars"
                 android:textColor="@color/black"
                 android:textSize="16sp"
+                android:drawablePadding="6dp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textWatchersLabel"
-                tools:text="Stars" />
+                tools:text="Stars"
+                app:drawableStartCompat="@drawable/ic_star_24" />
 
             <TextView
                 android:id="@+id/textWatchersCount"
@@ -127,9 +131,11 @@
                 android:text="@string/details_watchers"
                 android:textColor="@color/black"
                 android:textSize="16sp"
+                android:drawablePadding="6dp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textRepositoryDescription"
-                tools:text="Watchers" />
+                tools:text="Watchers"
+                app:drawableStartCompat="@drawable/ic_watcher_24" />
 
             <TextView
                 android:id="@+id/textStargazersCount"
