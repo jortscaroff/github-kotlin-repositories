@@ -5,6 +5,10 @@ plugins {
     id 'dagger.hilt.android.plugin'
 }
 
+def apikeyPropertiesFile = rootProject.file("apikey.properties")
+def apikeyProperties = new Properties()
+apikeyProperties.load(new FileInputStream(apikeyPropertiesFile))
+
 android {
     compileSdkVersion 30
     buildToolsVersion "30.0.3"
@@ -16,8 +20,13 @@ android {
         versionCode 1
         versionName "1.0"
 
+        buildConfigField "String", "CONSUMER_KEY", apikeyProperties['CONSUMER_KEY']
+        buildConfigField "String", "CONSUMER_SECRET", apikeyProperties['CONSUMER_SECRET']
+
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
+
+
 
     buildTypes {
         release {

@@ -15,8 +15,8 @@ import retrofit2.Retrofit
 class GithubUtils {
 
     private companion object {
-        const val clientId = "8710e7bbc4f492a667ec"
-        const val clientSecret = "0a53b6cde0488cb33576c89070344195a8eeb919"
+        const val clientId = BuildConfig.CONSUMER_KEY
+        const val clientSecret = BuildConfig.CONSUMER_SECRET
         const val scheme ="https"
         const val host ="github.com"
         const val redirectUrl = "jortscaroff://callback"
